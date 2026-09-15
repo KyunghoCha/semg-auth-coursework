@@ -1,0 +1,21 @@
+{
+  "executed_at": "2026-09-15T14:29:02+09:00",
+  "python": "3.12.14",
+  "interpreter": "/home/ckh/anaconda3/envs/semg/bin/python",
+  "os": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "PyWavelets": "1.9.0",
+    "matplotlib": "3.11.0",
+    "torch": "2.13.0+cu126",
+    "torchvision": "0.28.0+cu126",
+    "ipykernel": "7.3.0",
+    "nbformat": "5.11.0",
+    "nbclient": "0.11.0",
+    "nbconvert": "7.17.1"
+  },
+  "stdout": "Python: 3.12.14\nInterpreter: /home/ckh/anaconda3/envs/semg/bin/python\nOS: Linux 6.6.87.2-microsoft-standard-WSL2\nImports: numpy, scipy, pandas, sklearn, pywt, matplotlib, torch, torchvision OK\nPyTorch: 2.13.0+cu126 | torchvision: 0.28.0+cu126\nCUDA build: 12.6 | available: True\nGPU: NVIDIA GeForce RTX 3070 Laptop GPU\nGPU operation: [2.0, 2.0, 2.0, 2.0]"
+}

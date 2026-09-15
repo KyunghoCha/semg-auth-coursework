@@ -1,0 +1,11 @@
+Executed at: 2026-09-15T14:29:02+09:00
+Command: semg Python subprocess
+
+Python: 3.12.14
+Interpreter: /home/ckh/anaconda3/envs/semg/bin/python
+OS: Linux 6.6.87.2-microsoft-standard-WSL2
+Imports: numpy, scipy, pandas, sklearn, pywt, matplotlib, torch, torchvision OK
+PyTorch: 2.13.0+cu126 | torchvision: 0.28.0+cu126
+CUDA build: 12.6 | available: True
+GPU: NVIDIA GeForce RTX 3070 Laptop GPU
+GPU operation: [2.0, 2.0, 2.0, 2.0]

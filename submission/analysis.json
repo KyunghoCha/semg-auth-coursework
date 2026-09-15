@@ -1,0 +1,245 @@
+{
+  "executed_at": "2026-09-15T14:29:02+09:00",
+  "repository_url": "https://github.com/KyunghoCha/semg-auth-coursework",
+  "data_repository": "https://github.com/sea3551/palm-sEMG-doorknob-filtered",
+  "data_commit": "adb7955f4416165c88e4111af6f8fdafd416209c",
+  "file_count": 250,
+  "all_shape": [
+    3000,
+    2
+  ],
+  "all_finite": true,
+  "duplicate_content_count": 1,
+  "duplicate_rows": [
+    {
+      "subject": "E",
+      "trial": 38,
+      "path": "data/data/E/e (38).csv"
+    },
+    {
+      "subject": "E",
+      "trial": 50,
+      "path": "data/data/E/e (50).csv"
+    }
+  ],
+  "summary": [
+    {
+      "subject": "A",
+      "trials": 50,
+      "shape": "(3000, 2)",
+      "duration_s": 3.0,
+      "minimum": -3.53656,
+      "maximum": 4.33942
+    },
+    {
+      "subject": "B",
+      "trials": 50,
+      "shape": "(3000, 2)",
+      "duration_s": 3.0,
+      "minimum": -1.38533,
+      "maximum": 1.67226
+    },
+    {
+      "subject": "C",
+      "trials": 50,
+      "shape": "(3000, 2)",
+      "duration_s": 3.0,
+      "minimum": -0.663993,
+      "maximum": 0.741765
+    },
+    {
+      "subject": "D",
+      "trials": 50,
+      "shape": "(3000, 2)",
+      "duration_s": 3.0,
+      "minimum": -1.24915,
+      "maximum": 1.27618
+    },
+    {
+      "subject": "E",
+      "trials": 50,
+      "shape": "(3000, 2)",
+      "duration_s": 3.0,
+      "minimum": -2.11037,
+      "maximum": 2.01869
+    }
+  ],
+  "selected_trials": [
+    {
+      "subject": "A",
+      "trial": 1,
+      "path": "data/data/A/a (1).csv",
+      "sha256": "629a8814d1282ae7eff03e30c9c902a94f283f878d524e67a8c1286e37499472"
+    },
+    {
+      "subject": "B",
+      "trial": 1,
+      "path": "data/data/B/b (1).csv",
+      "sha256": "42cddb41d552d31fdf437d732e2f1c661c57caf48bd205dbb16730c7516a254f"
+    },
+    {
+      "subject": "C",
+      "trial": 1,
+      "path": "data/data/C/c (1).csv",
+      "sha256": "92ee85eca28cf586482b903b9e50c11bde114fbb1ded2229151b4ae6abeddac4"
+    },
+    {
+      "subject": "D",
+      "trial": 1,
+      "path": "data/data/D/d (1).csv",
+      "sha256": "fed3b336c7cea01f0c2a5a47477e57ed6eb70514f98fdb6f934a2048da2553b4"
+    },
+    {
+      "subject": "E",
+      "trial": 1,
+      "path": "data/data/E/e (1).csv",
+      "sha256": "ce0c5e3c30fe122c38e73043082ea666228f2aec3521b3551f34ed4c785199ec"
+    }
+  ],
+  "phase_rms": [
+    {
+      "subject": "A",
+      "channel": 1,
+      "grasp": 0.4698276584364381,
+      "rotate": 0.6931929044806244,
+      "stop": 0.27721096456680694
+    },
+    {
+      "subject": "A",
+      "channel": 2,
+      "grasp": 0.03638733808535234,
+      "rotate": 0.05895640843042799,
+      "stop": 0.03840062536178692
+    },
+    {
+      "subject": "B",
+      "channel": 1,
+      "grasp": 0.0479006795933382,
+      "rotate": 0.1198558422669336,
+      "stop": 0.06394194404219189
+    },
+    {
+      "subject": "B",
+      "channel": 2,
+      "grasp": 0.03445242147316114,
+      "rotate": 0.024413301232067225,
+      "stop": 0.015831565421116082
+    },
+    {
+      "subject": "C",
+      "channel": 1,
+      "grasp": 0.047024913408271064,
+      "rotate": 0.0897210202187359,
+      "stop": 0.057567316108893374
+    },
+    {
+      "subject": "C",
+      "channel": 2,
+      "grasp": 0.030333751210725807,
+      "rotate": 0.057415650744708294,
+      "stop": 0.03799371915940591
+    },
+    {
+      "subject": "D",
+      "channel": 1,
+      "grasp": 0.1701113204896633,
+      "rotate": 0.07200877041209539,
+      "stop": 0.05991866881677786
+    },
+    {
+      "subject": "D",
+      "channel": 2,
+      "grasp": 0.13507497102559438,
+      "rotate": 0.05580715336987939,
+      "stop": 0.02730760992916147
+    },
+    {
+      "subject": "E",
+      "channel": 1,
+      "grasp": 0.06362468150330099,
+      "rotate": 0.0897019752116544,
+      "stop": 0.14657671149723187
+    },
+    {
+      "subject": "E",
+      "channel": 2,
+      "grasp": 0.020986303854901512,
+      "rotate": 0.02494234217040027,
+      "stop": 0.029452413312187647
+    }
+  ],
+  "observations": [
+    "A의 1번 시행에서 채널 1 RMS는 파지 0.4698, 회전 0.6932, 정지 0.2772였다. 이 시행에서는 회전 구간의 진폭이 가장 컸고, 그림에서도 1초 직후에 큰 변동이 보였다.",
+    "D의 1번 시행에서 채널 1 RMS는 파지 0.1701, 회전 0.0720, 정지 0.0599였다. D에서는 파지 구간이 가장 커서 A와 시간별 진폭 패턴이 달랐다. 선택한 시행들에서 RMS가 가장 큰 동작 구간은 피험자마다 달랐다.",
+    "A의 회전 구간 RMS는 채널 1 0.6932, 채널 2 0.0590로 약 11.8배 차이가 났다. C의 같은 구간에서는 채널 1 0.0897, 채널 2 0.0574였다. 두 채널의 진폭 관계도 피험자에 따라 달랐다. 각 그림의 y축 눈금을 함께 확인해야 했다."
+  ],
+  "related_columns": [
+    "연구",
+    "측정 부위",
+    "인원",
+    "채널",
+    "동작",
+    "특징 추출 / 모델",
+    "정확도(%)"
+  ],
+  "related_rows": [
+    [
+      "Buriro 등 [17]",
+      "손목",
+      50,
+      8,
+      "박수치기",
+      "GAN / DNN",
+      "97.94"
+    ],
+    [
+      "Fan 등 [18]",
+      "전완",
+      80,
+      8,
+      "스마트폰 잠금 해제",
+      "별도 기재 없음 / Siamese CNN",
+      "92.06"
+    ],
+    [
+      "Gursoy [19]",
+      "전완",
+      5,
+      4,
+      "손동작 6종",
+      "DWT·EWT·EMD / CNN",
+      "최대 95.62"
+    ],
+    [
+      "Kim 등 [20]",
+      "이두·삼두",
+      40,
+      12,
+      "손동작 3종",
+      "CQT / CNN",
+      "97.50"
+    ],
+    [
+      "Lu 등 [21]",
+      "전완",
+      21,
+      4,
+      "손 펴기",
+      "DWT·CWT / CNN",
+      "최대 99.206"
+    ],
+    [
+      "Shin 등 (대상 논문)",
+      "손바닥",
+      5,
+      2,
+      "문손잡이 회전",
+      "CWT / DenseNet161",
+      "94.00"
+    ]
+  ],
+  "differences": [
+    "선행연구가 손목·전완·상완에서 박수나 특정 손동작을 측정한 데 비해, 대상 논문은 손바닥 두 채널로 일상적인 문손잡이 회전을 사용자 식별의 입력으로 사용한다.",
+    "대상 논문은 CWT와 DenseNet161을 결합해 등록된 5명 사이의 식별을 평가하며, 연구마다 피험자 수·동작·평가 조건이 달라 표의 정확도만으로 방법의 우열을 단정할 수 없다."
+  ]
+}
