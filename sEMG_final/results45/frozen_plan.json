@@ -1,0 +1,60 @@
+{
+  "frozen_at_utc": "2026-10-02T21:14:00Z",
+  "dataset_commit": "adb7955f4416165c88e4111af6f8fdafd416209c",
+  "preprocessing": "lecture filters; trial-first split; 300ms/150ms; joint window minmax; morl scales1-32; abs channel maps plus mean",
+  "models": [
+    "SimpleCNN",
+    "ResNet18",
+    "DenseNet161"
+  ],
+  "holdout_training_seeds": [
+    42,
+    43,
+    44
+  ],
+  "epochs": 45,
+  "optimizer": "Adam",
+  "learning_rate": 0.001,
+  "batch_size": 16,
+  "pretrained": false,
+  "checkpoint_rule": "fixed final epoch45; no selection by final-test scores",
+  "holdout": "same 199 development/50 final-test trials as 5epoch baseline; final-test previously observed, so later results are exploratory reused-holdout estimates",
+  "cv": "DenseNet161 stratified5fold within199 development trials, seeds43-47",
+  "additional_variant": "DenseNet161 plus one training-only BN-statistics recalibration, sampler seed2026,batch16; identical learned parameters",
+  "variant_selection_evidence": "internal validation original88.815789% vs recalibrated89.078947%; macroF1 88.778580% vs89.044064%; only2 additional correct windows, not evidence of robust improvement",
+  "reporting_rule": "report all3 unmodified models and the explicitly labeled DenseNet BN variant; retain both variants regardless of final-test ranking; report both DenseNet CV variants",
+  "training_test_gate": "holdout training omits --evaluate-test; all final evaluation occurs only after this plan is frozen",
+  "cpu_schedule": "at most2 concurrent jobs, each4threads on disjoint CPU affinity0-3 or4-7; no paid compute",
+  "pilot": "first1epoch of DenseNet holdout seeds42 and43, then resume identical configs",
+  "clarified_at_utc": "2026-10-02T21:26:00Z",
+  "initial_plan_sha256": "81810fa2f22b4165b064bc242a43b0164c462645844c95ecbe7cec872bbd1abd",
+  "clarification": "Structured runtime/CV/BN fields added for evaluator assertions; no model, training recipe, split, seed, or reporting change. No new holdout scores have been computed.",
+  "filter_mode": "lecture",
+  "runtime": {
+    "device": "cpu",
+    "threads": 4,
+    "torch_version": "2.8.0+cpu"
+  },
+  "cv_model": "DenseNet161",
+  "cv_folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "cv_seeds": [
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "bn_recalibration": {
+    "model": "DenseNet161",
+    "seed": 2026,
+    "batch_size": 16,
+    "passes": 1,
+    "training_only": true
+  }
+}

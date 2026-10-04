@@ -1,0 +1,77 @@
+{
+  "started_at_utc": "2026-10-02T21:21:28.627959+00:00",
+  "pilot_only": false,
+  "cpu_slots": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ]
+  ],
+  "jobs": {
+    "holdout_DenseNet161_seed42": {
+      "status": "running",
+      "started_at_utc": "2026-10-02T21:21:28.628710+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "holdout_DenseNet161_seed43": {
+      "status": "running",
+      "started_at_utc": "2026-10-02T21:21:28.629012+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "holdout_DenseNet161_seed44": {
+      "status": "queued"
+    },
+    "cv_DenseNet161_fold1": {
+      "status": "queued"
+    },
+    "cv_DenseNet161_fold2": {
+      "status": "queued"
+    },
+    "cv_DenseNet161_fold3": {
+      "status": "queued"
+    },
+    "cv_DenseNet161_fold4": {
+      "status": "queued"
+    },
+    "cv_DenseNet161_fold5": {
+      "status": "queued"
+    },
+    "holdout_ResNet18_seed42": {
+      "status": "queued"
+    },
+    "holdout_ResNet18_seed43": {
+      "status": "queued"
+    },
+    "holdout_ResNet18_seed44": {
+      "status": "queued"
+    },
+    "holdout_SimpleCNN_seed42": {
+      "status": "queued"
+    },
+    "holdout_SimpleCNN_seed43": {
+      "status": "queued"
+    },
+    "holdout_SimpleCNN_seed44": {
+      "status": "queued"
+    }
+  },
+  "updated_at_utc": "2026-10-02T21:21:28.629229+00:00"
+}

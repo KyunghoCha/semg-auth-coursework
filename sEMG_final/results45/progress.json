@@ -1,0 +1,203 @@
+{
+  "started_at_utc": "2026-10-02T23:30:59.453845+00:00",
+  "pilot_only": false,
+  "cpu_slots": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ]
+  ],
+  "jobs": {
+    "holdout_DenseNet161_seed42": {
+      "status": "trained",
+      "started_at_utc": "2026-10-02T23:30:59.454812+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T00:55:29.466856+00:00",
+      "wall_seconds": 5070.011930219996
+    },
+    "holdout_DenseNet161_seed43": {
+      "status": "trained",
+      "started_at_utc": "2026-10-02T23:30:59.454623+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T00:55:21.278648+00:00",
+      "wall_seconds": 5061.823902198004
+    },
+    "holdout_DenseNet161_seed44": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T00:55:21.279264+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T03:33:52.741804+00:00",
+      "wall_seconds": 9511.462185603006
+    },
+    "cv_DenseNet161_fold1": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T00:55:29.467495+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T03:13:25.452928+00:00",
+      "wall_seconds": 8275.984488893999
+    },
+    "cv_DenseNet161_fold2": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T03:13:25.459485+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T05:23:54.231429+00:00",
+      "wall_seconds": 7828.771766721999
+    },
+    "cv_DenseNet161_fold3": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T03:33:52.742731+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T05:44:42.213075+00:00",
+      "wall_seconds": 7849.470216757996
+    },
+    "cv_DenseNet161_fold4": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T05:23:54.232111+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T07:35:48.799731+00:00",
+      "wall_seconds": 7914.567523931997
+    },
+    "cv_DenseNet161_fold5": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T05:44:42.213622+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T07:56:13.938678+00:00",
+      "wall_seconds": 7891.724961261003
+    },
+    "holdout_ResNet18_seed42": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T07:35:48.800665+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T08:01:16.863830+00:00",
+      "wall_seconds": 1528.0630721350026
+    },
+    "holdout_ResNet18_seed43": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T07:56:13.939267+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T08:22:09.987456+00:00",
+      "wall_seconds": 1556.048088999989
+    },
+    "holdout_ResNet18_seed44": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T08:01:16.864393+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T08:27:05.726775+00:00",
+      "wall_seconds": 1548.8622845130012
+    },
+    "holdout_SimpleCNN_seed42": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T08:22:09.988006+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T08:28:21.643946+00:00",
+      "wall_seconds": 371.6558484760026
+    },
+    "holdout_SimpleCNN_seed43": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T08:27:05.727497+00:00",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T08:34:07.263534+00:00",
+      "wall_seconds": 421.53594753099605
+    },
+    "holdout_SimpleCNN_seed44": {
+      "status": "trained",
+      "started_at_utc": "2026-10-03T08:28:21.644589+00:00",
+      "cpu_affinity": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "returncode": 0,
+      "finished_at_utc": "2026-10-03T08:35:36.995932+00:00",
+      "wall_seconds": 435.35124664400064
+    }
+  },
+  "updated_at_utc": "2026-10-03T08:35:36.995958+00:00"
+}

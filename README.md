@@ -1,3 +1,15 @@
+# 손바닥 sEMG 사용자 식별
+
+## 최종 과제 (45epoch)
+
+- [실행 방법·결과](sEMG_final/README.md)
+- [최종 보고서 PDF](sEMG_final/results45/summary/report.pdf)
+- [결과 비교표](sEMG_final/results45/summary/comparison.csv)
+
+3개 모델 × 3개 seed와 DenseNet 5-fold, 총 14회 학습을 각각 45epoch 완료했다. 실제 실행은 CPU이며, 최고 평균 정확도는 DenseNet161+BN 88.95%다. 논문 94% 재현을 달성했다고 주장하지 않는다. 생성형 AI를 코드 작성·실험·검증·보고서 정리에 사용했다.
+
+실행은 sEMG_final 폴더에서 시작한다. 아래의 1주차 자료와 기존 파일은 보존했다.
+
 # 손바닥 sEMG 사용자 식별 — 1주차 실습
 
 문손잡이 회전 중 기록한 손바닥 sEMG 공개 데이터의 구조와 파형을 확인한 수업 실습입니다.

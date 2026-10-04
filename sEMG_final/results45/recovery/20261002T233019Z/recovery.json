@@ -1,0 +1,45 @@
+{
+  "recorded_at_utc": "2026-10-02T23:30:20.429972+00:00",
+  "reason": "Environment restart; stale running status with no live trainer",
+  "protocol_unchanged": true,
+  "source_code_unchanged": true,
+  "records": [
+    {
+      "run": "holdout_DenseNet161_seed42",
+      "checkpoint_epoch": 20,
+      "last_logged_epoch": 22,
+      "checkpoint_sha256": "9f411bea4488ae4f5432c3bcd29c2c266cd1b4f869372938fe7888a7b5d41913",
+      "saved_rng": [
+        "python",
+        "numpy_name",
+        "numpy_keys",
+        "numpy_pos",
+        "numpy_gauss",
+        "numpy_cached",
+        "torch",
+        "loader",
+        "cuda"
+      ],
+      "resume_unchanged": true
+    },
+    {
+      "run": "holdout_DenseNet161_seed43",
+      "checkpoint_epoch": 20,
+      "last_logged_epoch": 22,
+      "checkpoint_sha256": "72a332acbc998c676e49afe98b835a034ff2dd08058adb310717e173acc046f0",
+      "saved_rng": [
+        "python",
+        "numpy_name",
+        "numpy_keys",
+        "numpy_pos",
+        "numpy_gauss",
+        "numpy_cached",
+        "torch",
+        "loader",
+        "cuda"
+      ],
+      "resume_unchanged": true
+    }
+  ],
+  "command": "python -u run_cpu45.py --output-root /workspace/shared/semg_45epoch_comparison --cache-dir /workspace/shared/semg_worklog/colab_cache --workers 2"
+}

@@ -1,0 +1,23 @@
+{"model": "SimpleCNN", "accuracy": 0.631578947368421, "f1_macro": 0.6245711053842804, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "SimpleCNN", "accuracy": 0.6221052631578947, "f1_macro": 0.6144705921817181, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "SimpleCNN", "accuracy": 0.6252631578947369, "f1_macro": 0.6234369022015213, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "ResNet18", "accuracy": 0.888421052631579, "f1_macro": 0.8877863701196554, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "ResNet18", "accuracy": 0.88, "f1_macro": 0.8798313881338483, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "ResNet18", "accuracy": 0.8726315789473684, "f1_macro": 0.8720778743536437, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "DenseNet161", "accuracy": 0.8894736842105263, "f1_macro": 0.8900732782217504, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "DenseNet161+BN", "accuracy": 0.8978947368421053, "f1_macro": 0.8970524520607388, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "DenseNet161", "accuracy": 0.88, "f1_macro": 0.8795695816349063, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "DenseNet161+BN", "accuracy": 0.8936842105263157, "f1_macro": 0.8931043571912977, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "DenseNet161", "accuracy": 0.8863157894736842, "f1_macro": 0.8868623079663032, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "DenseNet161+BN", "accuracy": 0.8768421052631579, "f1_macro": 0.8768980730751824, "evaluation_role": "reused 50-trial holdout; 5-epoch baseline test scores previously observed"}
+{"model": "DenseNet161", "accuracy": 0.7618421052631579, "f1_macro": 0.7641337822443814, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161+BN", "accuracy": 0.843421052631579, "f1_macro": 0.8439339878802006, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161", "accuracy": 0.7789473684210526, "f1_macro": 0.7796816330071833, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161+BN", "accuracy": 0.8539473684210527, "f1_macro": 0.8546840606837213, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161", "accuracy": 0.8578947368421053, "f1_macro": 0.8572288412027452, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161+BN", "accuracy": 0.8618421052631579, "f1_macro": 0.861743485714813, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161", "accuracy": 0.8105263157894737, "f1_macro": 0.8121682185977036, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161+BN", "accuracy": 0.8552631578947368, "f1_macro": 0.8555932340562743, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161", "accuracy": 0.854251012145749, "f1_macro": 0.8493738348563212, "evaluation_role": "cross-validation within 199 development trials"}
+{"model": "DenseNet161+BN", "accuracy": 0.8663967611336032, "f1_macro": 0.8597920227685065, "evaluation_role": "cross-validation within 199 development trials"}
+All 22 frozen evaluations complete; no variant was selected using holdout scores

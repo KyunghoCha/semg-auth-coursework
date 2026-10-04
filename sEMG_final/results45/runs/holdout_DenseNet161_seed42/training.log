@@ -1,0 +1,53 @@
+{"epoch": 1, "train_loss": 1.0677919979607482, "online_train_accuracy": 0.5770960063475271, "train_seconds": 243.9621921939979, "device_name": "CPU"}
+Paused at epoch 1; rerun the identical command to resume.
+Resuming completed epoch 1/45
+{"epoch": 2, "train_loss": 0.7857870033448792, "online_train_accuracy": 0.6921449352023274, "train_seconds": 223.1172507970041, "device_name": "CPU"}
+{"epoch": 3, "train_loss": 0.6202726981148647, "online_train_accuracy": 0.7699021422903993, "train_seconds": 230.4194523240003, "device_name": "CPU"}
+{"epoch": 4, "train_loss": 0.5700940509001372, "online_train_accuracy": 0.7884157630256546, "train_seconds": 222.96815792199777, "device_name": "CPU"}
+{"epoch": 5, "train_loss": 0.449674259580591, "online_train_accuracy": 0.8317905316053954, "train_seconds": 231.31368375100283, "device_name": "CPU"}
+{"epoch": 6, "train_loss": 0.4115616694798201, "online_train_accuracy": 0.8473948690822534, "train_seconds": 233.85544002900133, "device_name": "CPU"}
+{"epoch": 7, "train_loss": 0.3691549744123001, "online_train_accuracy": 0.8664374504099445, "train_seconds": 234.5645770619958, "device_name": "CPU"}
+{"epoch": 8, "train_loss": 0.31960193944084553, "online_train_accuracy": 0.8815128272943665, "train_seconds": 224.91721382700052, "device_name": "CPU"}
+{"epoch": 9, "train_loss": 0.3292838921585716, "online_train_accuracy": 0.8825707484792383, "train_seconds": 226.041162153997, "device_name": "CPU"}
+{"epoch": 10, "train_loss": 0.2736300568731097, "online_train_accuracy": 0.899233007140968, "train_seconds": 220.751506532004, "device_name": "CPU"}
+{"epoch": 11, "train_loss": 0.28566166690849526, "online_train_accuracy": 0.9029357312880191, "train_seconds": 228.13853038199886, "device_name": "CPU"}
+{"epoch": 12, "train_loss": 0.24257133202762776, "online_train_accuracy": 0.9132504628405184, "train_seconds": 222.73444911499973, "device_name": "CPU"}
+{"epoch": 13, "train_loss": 0.21121161367820074, "online_train_accuracy": 0.9209203914308384, "train_seconds": 220.23583885099652, "device_name": "CPU"}
+{"epoch": 14, "train_loss": 0.21613013113587032, "online_train_accuracy": 0.922507273208146, "train_seconds": 224.01056050699844, "device_name": "CPU"}
+{"epoch": 15, "train_loss": 0.16744052837273962, "online_train_accuracy": 0.9386405712774398, "train_seconds": 216.63771393799834, "device_name": "CPU"}
+{"epoch": 16, "train_loss": 0.18840676720685917, "online_train_accuracy": 0.9309706426871198, "train_seconds": 211.2635064089991, "device_name": "CPU"}
+{"epoch": 17, "train_loss": 0.1622277512541447, "online_train_accuracy": 0.9434012166093626, "train_seconds": 207.86142966800253, "device_name": "CPU"}
+{"epoch": 18, "train_loss": 0.1305280927242551, "online_train_accuracy": 0.9545093890505157, "train_seconds": 210.44931323199853, "device_name": "CPU"}
+{"epoch": 19, "train_loss": 0.14197664348720415, "online_train_accuracy": 0.9484263422375033, "train_seconds": 205.30236803399748, "device_name": "CPU"}
+{"epoch": 20, "train_loss": 0.125310412200187, "online_train_accuracy": 0.9542449087542978, "train_seconds": 202.45513397600007, "device_name": "CPU"}
+{"epoch": 21, "train_loss": 0.120158265581755, "online_train_accuracy": 0.961385876752182, "train_seconds": 207.59494636599993, "device_name": "CPU"}
+{"epoch": 22, "train_loss": 0.09462571448698952, "online_train_accuracy": 0.9642951600105792, "train_seconds": 213.08528803800436, "device_name": "CPU"}
+
+{"recovery_at_utc": "2026-10-02T23:30:19.843831+00:00", "reason": "Executor restart interrupted training; no live process remains", "resume_checkpoint_epoch": 20, "discarded_uncheckpointed_epochs": [21, 22], "archived_history": "/workspace/shared/semg_45epoch_comparison/recovery/20261002T233019Z/holdout_DenseNet161_seed42_history.csv"}
+Resuming completed epoch 20/45
+{"epoch": 21, "train_loss": 0.120158265581755, "online_train_accuracy": 0.961385876752182, "train_seconds": 218.31619890900038, "device_name": "CPU"}
+{"epoch": 22, "train_loss": 0.09462571448698952, "online_train_accuracy": 0.9642951600105792, "train_seconds": 211.78915264899842, "device_name": "CPU"}
+{"epoch": 23, "train_loss": 0.0813806151314295, "online_train_accuracy": 0.972494049193335, "train_seconds": 202.11530736200075, "device_name": "CPU"}
+{"epoch": 24, "train_loss": 0.10299147346040495, "online_train_accuracy": 0.9603279555673102, "train_seconds": 207.98724159100675, "device_name": "CPU"}
+{"epoch": 25, "train_loss": 0.09853520677236535, "online_train_accuracy": 0.9632372388257074, "train_seconds": 206.207773670998, "device_name": "CPU"}
+{"epoch": 26, "train_loss": 0.07357948409116077, "online_train_accuracy": 0.9738164506744248, "train_seconds": 202.85803014900011, "device_name": "CPU"}
+{"epoch": 27, "train_loss": 0.1133287558493423, "online_train_accuracy": 0.9653530811954509, "train_seconds": 208.03848877300334, "device_name": "CPU"}
+{"epoch": 28, "train_loss": 0.09293714188274782, "online_train_accuracy": 0.9677334038614124, "train_seconds": 206.61345859299763, "device_name": "CPU"}
+{"epoch": 29, "train_loss": 0.0703122416648869, "online_train_accuracy": 0.9748743718592965, "train_seconds": 202.7222849030004, "device_name": "CPU"}
+{"epoch": 30, "train_loss": 0.04856519908756333, "online_train_accuracy": 0.9817508595609628, "train_seconds": 197.20357761700143, "device_name": "CPU"}
+{"epoch": 31, "train_loss": 0.1340437653723043, "online_train_accuracy": 0.9587410737900026, "train_seconds": 200.01536333499826, "device_name": "CPU"}
+{"epoch": 32, "train_loss": 0.0840154580353924, "online_train_accuracy": 0.9706426871198096, "train_seconds": 199.43188622399612, "device_name": "CPU"}
+{"epoch": 33, "train_loss": 0.07645519351995832, "online_train_accuracy": 0.9756678127479502, "train_seconds": 199.54872656699445, "device_name": "CPU"}
+{"epoch": 34, "train_loss": 0.06742251125459664, "online_train_accuracy": 0.9775191748214758, "train_seconds": 195.8241280020011, "device_name": "CPU"}
+{"epoch": 35, "train_loss": 0.05666863760106151, "online_train_accuracy": 0.9785770960063476, "train_seconds": 201.10331062699697, "device_name": "CPU"}
+{"epoch": 36, "train_loss": 0.04761341808122898, "online_train_accuracy": 0.9830732610420524, "train_seconds": 199.3714468870021, "device_name": "CPU"}
+{"epoch": 37, "train_loss": 0.05302053882452987, "online_train_accuracy": 0.9836022216344882, "train_seconds": 201.6305728149964, "device_name": "CPU"}
+{"epoch": 38, "train_loss": 0.05514877491711521, "online_train_accuracy": 0.9780481354139117, "train_seconds": 200.40202459000284, "device_name": "CPU"}
+{"epoch": 39, "train_loss": 0.046766246163706976, "online_train_accuracy": 0.9812218989685269, "train_seconds": 196.12230831700435, "device_name": "CPU"}
+{"epoch": 40, "train_loss": 0.04264012700262292, "online_train_accuracy": 0.9849246231155779, "train_seconds": 197.63151284499327, "device_name": "CPU"}
+{"epoch": 41, "train_loss": 0.0712711327234852, "online_train_accuracy": 0.9780481354139117, "train_seconds": 202.36813036999956, "device_name": "CPU"}
+{"epoch": 42, "train_loss": 0.09853703375766337, "online_train_accuracy": 0.9672044432689765, "train_seconds": 202.3340960830028, "device_name": "CPU"}
+{"epoch": 43, "train_loss": 0.051679106228286587, "online_train_accuracy": 0.980428458079873, "train_seconds": 201.3991061400011, "device_name": "CPU"}
+{"epoch": 44, "train_loss": 0.026811128531909208, "online_train_accuracy": 0.992065591113462, "train_seconds": 202.0911755240013, "device_name": "CPU"}
+{"epoch": 45, "train_loss": 0.03677659514942668, "online_train_accuracy": 0.9870404654853213, "train_seconds": 201.01727797000058, "device_name": "CPU"}
+Training complete. Test remains unevaluated; use --evaluate-test after locking the recipe.

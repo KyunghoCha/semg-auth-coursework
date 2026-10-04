@@ -1,0 +1,5 @@
+{
+  "epochs": 45,
+  "test_evaluated": false,
+  "evaluation_role": "cross-validation within 199 development trials"
+}

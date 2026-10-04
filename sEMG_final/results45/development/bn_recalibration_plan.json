@@ -1,0 +1,15 @@
+{
+  "prespecified_at_utc": "2026-10-02T19:53:00Z",
+  "source_run": "/workspace/shared/semg_45epoch_cpu/validate_DenseNet161_seed42_lecture",
+  "source_epoch": 45,
+  "calibration_scope": "159 training trials only; no validation or final-test trials",
+  "calibration_seed": 2026,
+  "batch_size": 16,
+  "passes": 1,
+  "drop_last": false,
+  "utility": "torch.optim.swa_utils.update_bn",
+  "selection_rule": "adopt only if validation accuracy strictly increases and macro F1 does not decrease",
+  "validation_scope": "same 40 internal-validation trials, 760 windows",
+  "checks": ["original predictions twice identical", "evaluation changes no state", "only BN running statistics/counters change", "all learned parameters bitwise unchanged", "all BN counters equal 189", "repeat recalibration identically", "source checkpoint unchanged"],
+  "interpretation": "A gain is an effect at epoch 45; it does not establish the cause of prior fluctuations. This is validation-selected, not an exact paper recipe."
+}

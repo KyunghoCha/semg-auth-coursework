@@ -1,0 +1,9 @@
+data/
+cache*/
+.venv/
+__pycache__/
+*.pyc
+*.pt
+*.npy
+*.tmp
+*.lock
