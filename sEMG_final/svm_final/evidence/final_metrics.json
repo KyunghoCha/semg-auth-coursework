@@ -1,0 +1,124 @@
+{
+  "completed_utc": "2026-10-06T03:23:47.632285+00:00",
+  "n_train_trials": 199,
+  "n_test_trials": 50,
+  "n_test_windows": 950,
+  "calibrated_SVM": {
+    "accuracy": 0.9336842105263158,
+    "precision_macro": 0.9345149792021378,
+    "recall_macro": 0.9336842105263157,
+    "f1_macro": 0.933980760427341,
+    "cross_entropy": 0.30949414248491536,
+    "confusion_matrix": [
+      [
+        188,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        172,
+        2,
+        3,
+        13
+      ],
+      [
+        0,
+        4,
+        176,
+        2,
+        8
+      ],
+      [
+        0,
+        4,
+        5,
+        179,
+        2
+      ],
+      [
+        1,
+        14,
+        2,
+        1,
+        172
+      ]
+    ],
+    "trial_mean_probability": {
+      "accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "f1_macro": 1.0,
+      "cross_entropy": 0.1746380475804485,
+      "confusion_matrix": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          10,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10
+        ]
+      ]
+    },
+    "clustered_window_uncertainty": {
+      "method": "Class-stratified whole-trial bootstrap,conditional on trainedmodel(s),not selection-adjusted",
+      "n_clusters": 50,
+      "resamples": 10000,
+      "seed": 2026,
+      "interval95": [
+        0.9147368421052632,
+        0.9515789473684211
+      ]
+    },
+    "feature_transform_seconds": 0.6270072689949302,
+    "predict_seconds": 0.12324053500560694,
+    "model_only_inference_ms_per_window": 0.8177362200149219,
+    "timing_note": "One precomputed39feature window; excludes recording andfeatureextraction; transform time separately measures50wholetrials",
+    "support_vectors": 1440,
+    "serialized_model_bytes": 642444,
+    "feature_columns": 39
+  },
+  "limitations": [
+    "Previously reused test; no pristine independent evaluation",
+    "Five enrolled identities in one session; no cross-session/new-person/open-set claim",
+    "Overlapping windows correlated; uncertainty resamples wholetrials",
+    "Featurepipeline preserves amplitude; session/electrode confounding possible",
+    "Three-model ensemble and3secondtrial endpoint have different cost/latency from one300mswindow model",
+    "Model-only timing excludes recording/filter/CWT; wholetrial filtfilt noncausal",
+    "Fresh paired baseline comparison measures the complete selected recipes, not an isolated causal effect"
+  ],
+  "result_scope": "Historical reused-holdout exploratory result; not a new clean evaluation.",
+  "source_summary_sha256": "f0563cc4f51a70b2063788e9731ca6f9a440c8fbcd53365fef1a5a43e6aaeef2",
+  "source_summary_path": "source/semg_improvement/sEMG_final/results_improvement/final_evaluation/summary.json",
+  "prediction_sha256": "6cf649b5fedcb4317a24dd6ace1824c3f30a92d30e3e1a115cd972bd193c89e1"
+}

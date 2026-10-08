@@ -1,14 +1,18 @@
 # 손바닥 sEMG 사용자 식별
 
-## 최종 과제 (45epoch)
+## 최종 과제
 
-- [실행 방법·결과](sEMG_final/README.md)
+최종 선택은 **39특징 보정 SVM 단독**이다. 기존 재사용 시험집합 50시행의 950창 중 887개를 맞혀 **Accuracy 93.37%, macro F1 93.40%**를 기록했다. 새로운 독립시험이나 이번에 새로 수행한 SVM 튜닝 결과는 아니다.
+
+- [실행 방법·모델 비교·최종 결과](sEMG_final/README.md)
 - [최종 보고서 PDF](sEMG_final/results45/summary/report.pdf)
-- [결과 비교표](sEMG_final/results45/summary/comparison.csv)
+- [SVM 재현 코드·예측 검산](sEMG_final/svm_final/README.md)
+- [최종 선택 기록](sEMG_final/final_selection.json)
+- [필수 딥러닝 결과 비교표](sEMG_final/results45/summary/comparison.csv)
 
-3개 모델 × 3개 seed와 DenseNet 5-fold, 총 14회 학습을 각각 45epoch 완료했다. 실제 실행은 CPU이며, 최고 평균 정확도는 DenseNet161+BN 88.95%다. 논문 94% 재현을 달성했다고 주장하지 않는다. 생성형 AI를 코드 작성·실험·검증·보고서 정리에 사용했다.
+수업 필수 항목인 DenseNet161·ResNet18·SimpleCNN의 각 3seed 45epoch 학습, DenseNet 5-fold, BN 변형, 4가지 지표·혼동행렬·오류 분석·연산비용·한계·재현 정보를 함께 제시했다. 해당 딥러닝 비교군의 최고 평균 Accuracy는 DenseNet161+BN 88.95%이며, 최종 SVM의 단일 모델 결과와 구분한다. 논문 94%를 정확히 재현했다고 주장하지 않는다. 생성형 AI를 코드 작성·실험·검증·보고서 정리에 사용했다.
 
-실행은 sEMG_final 폴더에서 시작한다. 아래의 1주차 자료와 기존 파일은 보존했다.
+실행은 sEMG_final 폴더에서 시작한다. 아래의 1주차 제출 자료는 보존했다.
 
 # 손바닥 sEMG 사용자 식별 — 1주차 실습
 
@@ -103,3 +107,4 @@ python scripts/build_week1_notebook.py
 선행연구 표는 대상 논문의 Table 1을 재구성한 2차 인용이며,
 각 선행연구를 별도로 재현하거나 동일 조건에서 비교한 결과가 아닙니다.
 파형은 위 공개 데이터의 대표 시행을 시각화한 것입니다.
+

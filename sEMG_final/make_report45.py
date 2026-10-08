@@ -1,5 +1,6 @@
 """Build the concise final PDF/README only after all22 evaluations verify."""
 import argparse
+import csv
 import json
 import os
 from pathlib import Path
@@ -18,7 +19,6 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Image, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
 from data_utils import load_trials
-from experiment import make_plan, preprocess, make_windows, normalize_windows, to_cwt, write_csv
 from summarize45 import summarize
 
 ROOT=Path(__file__).resolve().parent
@@ -41,6 +41,7 @@ def report_font(bold=False):
 
 
 def method_figures(out,data_dir):
+    from experiment import make_plan, preprocess, make_windows, normalize_windows, to_cwt, write_csv
     trials,_=load_trials(data_dir);plan=make_plan(trials)
     trial=trials[plan['holdout']['train'][0]];filtered=preprocess(trial.signal)
     f0,p0=welch(trial.signal[:,0],fs=1000,nperseg=512)
@@ -73,8 +74,16 @@ def error_text(item):
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--run-root',required=True)
     parser.add_argument('--data-dir',default=str(ROOT/'data/data'))
+    parser.add_argument('--from-saved', action='store_true', help='Recheck predictions and reuse existing method figures; no raw data or training')
     args=parser.parse_args();root=Path(args.run_root).resolve();summary=summarize(root);out=root/'summary'
-    distribution=method_figures(out,Path(args.data_dir))
+    if args.from_saved:
+        with (out/'dataset_summary.csv').open() as stream: distribution=list(csv.DictReader(stream))
+        for name in ['filter_check.png','cwt_example.png']:
+            if not (out/name).is_file(): raise FileNotFoundError(out/name)
+    else:
+        distribution=method_figures(out,Path(args.data_dir))
+    from svm_final.audit import audit as audit_svm
+    svm=audit_svm()
     pdfmetrics.registerFont(TTFont('Nanum',str(report_font())))
     pdfmetrics.registerFont(TTFont('NanumBold',str(report_font(bold=True))))
     body=ParagraphStyle('body',fontName='Nanum',fontSize=9.2,leading=14,spaceAfter=6,wordWrap='CJK')
@@ -88,9 +97,9 @@ def main():
         t=Table([[p(v,small) for v in row] for row in rows],colWidths=widths,repeatRows=1,hAlign='LEFT')
         t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#E9EEF2')),('GRID',(0,0),(-1,-1),.4,colors.HexColor('#D9D9D9')),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('TOPPADDING',(0,0),(-1,-1),3),('BOTTOMPADDING',(0,0),(-1,-1),3)]))
         story.extend([t,Spacer(1,6)])
-    add('손바닥 sEMG 식별',title);add('딥러닝프로그래밍 Step 1 · 45epoch 비교실험 · 차경호',small)
+    add('손바닥 sEMG 식별',title);add('딥러닝프로그래밍 Step 1 · 딥러닝 비교와 최종 SVM · 차경호',small)
     add('1 문제 정의',heading)
-    add('문손잡이 회전 중 측정한 sEMG로 등록자 A-E를 구분하는 closed-set 5클래스 식별이다. 동일 분할의 Accuracy·macro F1·연산비용으로 DenseNet161과 두 베이스라인을 비교한다. 학습 데이터만 이용하는 BN 재보정도 별도 평가했다.')
+    add('문손잡이 회전 중 측정한 sEMG로 등록자 A-E를 구분하는 closed-set 5클래스 식별이다. 동일 분할의 Accuracy·macro F1·연산비용으로 DenseNet161과 두 베이스라인을 비교한다. 학습 데이터만 이용하는 BN 재보정도 별도 평가했다. 최종 선택은 39특징 보정 SVM 단독이며, 재사용 시험창 887/950(93.37%)이다.')
     add('2 데이터',heading)
     add('공개 CSV 250개(5명×50시행), 시행당 3초·1,000 Hz·2채널이다. 수치가 동일한 E50을 제외한249시행을 사용자별 비율을 유지해 학습 199 / 시험 50으로 먼저 나눴다(seed 42). 창 생성 후 학습 3,781개·시험 950개이며 시험은 사용자별190개다.')
     table([['윈도우','A','B','C','D','E','합계']]+[[('학습' if row['split']=='train' else '시험')]+[row[k] for k in ['A','B','C','D','E','total']] for row in distribution],[30*mm]+[24*mm]*6)
@@ -107,9 +116,23 @@ def main():
     comparison=summary['comparison']
     table([['모델','Accuracy','Precision','Recall','F1']]+[[r['model']]+[pct(r[k+'_mean']) for k in ['accuracy','precision_macro','recall_macro','f1_macro']] for r in comparison],[46*mm,32*mm,32*mm,32*mm,32*mm])
     table([['모델','파라미터','학습/BN 초','추론 ms/창']]+[[r['model'],f"{r['parameters']:,}",f"{r['train_seconds_mean']:.1f} / {r['calibration_seconds_mean']:.1f}",f"{r['inference_ms_per_window_mean']:.2f}"] for r in comparison],[46*mm,42*mm,48*mm,38*mm])
-    add(f"평균 Accuracy 최고는 {summary['best_model']}, 최저는 {summary['worst_model']}이다. 동률은 학습+BN 시간이 짧은 쪽을 우선했다.",small)
+    add(f"필수 딥러닝 비교군의 평균 Accuracy 최고는 {summary['best_model']}, 최저는 {summary['worst_model']}이다. 동률은 학습+BN 시간이 짧은 쪽을 우선했다.",small)
     images=[Image(str(out/f"confusion_{r['model']}.png"),width=83*mm,height=73*mm) for r in comparison]
     story.append(Table([[images[0],images[1]],[images[2],images[3]]],colWidths=[87*mm,87*mm],style=TableStyle([('LEFTPADDING',(0,0),(-1,-1),0),('RIGHTPADDING',(0,0),(-1,-1),0)])))
+    story.append(PageBreak())
+    add('4 결과와 최종 선택',heading)
+    add('39특징 보정 SVM 단독을 최종 모델로 선택했다. 아래 93.37%는 기존에 완료한 단일 모델의 재사용 시험 결과이며, 이번 제출 정리에서 새 학습이나 SVM 튜닝을 수행한 수치가 아니다. 필수 DenseNet161·ResNet18·SimpleCNN 비교와 BN 변형은 앞뒤 페이지에 유지했다.',small)
+    add('SVM 방법',heading)
+    add('같은 199/50 시행 분할과 300 ms 창·150 ms hop을 쓴다. 전체 시행에 notch·band-pass를 적용한 뒤 창별 채널 평균을 제거한다. CWT·min-max 대신 로그 RMS·MAV 4개와 상대 대역파워·주파수·엔트로피·파형 모양·채널 상관 35개를 결합한다. 학습 부분에서만 StandardScaler를 적합하고 RBF SVC(C=1, gamma=scale)를 학습한다.',small)
+    add('Sigmoid 확률 보정은 seed 2026의 시행 단위 3-fold OOF 점수로 수행한다(ensemble=False). 각 보정 fold 안에서 scaler와 SVC를 새로 적합하고, 마지막에는 199 개발시행 전체로 단일 SVC를 재적합한다. 기존 18개 조합 탐색 뒤 고정한 보정 후보이며, 아래 5-fold는 선택 후 개발 안정성 점검이다.',small)
+    table([['최종 모델','Accuracy','Precision','Recall','F1'],['보정 SVM 단독','93.37','93.45','93.37','93.40']],[46*mm,32*mm,32*mm,32*mm,32*mm])
+    add('887/950 시험창 정답; Precision·Recall·F1은 macro %. 50시행에서 19창의 확률을 평균한 별도 지표는 50/50이다. 950창은 독립 표본이 아니며, 3초 시행 집계 100%를 300 ms 창 정확도와 혼동하지 않는다. 앞쪽 딥러닝 표는 3seed 평균이므로 단일 SVM과 반복 수·실행 조건이 다르다.',small)
+    story.append(Image(str(ROOT/'svm_final/confusion.png'),width=78*mm,height=69*mm,hAlign='CENTER'))
+    add('행=실제, 열=예측. 최대 오분류 E→B 14개를 빨간색으로 표시했다(B→E 13개). 두 사용자 사이에 27/63개 오류가 집중됐다. 진폭 정보를 유지한 특징은 구분에 도움이 될 수 있으나 세션·전극 조건에 민감할 수 있으며, 이것만으로 오류 원인을 확정하지 않는다.',small)
+    table([['개발 Fold','1','2','3','4','5','평균±SD'],['Accuracy %','93.82','89.87','93.03','93.03','91.36','92.22±1.42'],['Macro F1 %','93.81','89.89','93.03','93.01','91.12','92.17±1.45']],[29*mm,22*mm,22*mm,22*mm,22*mm,22*mm,35*mm])
+    add('SD는 모집단 기준(ddof=0). Fold별 시험창 수는 760/760/760/760/741이며, 이 값은 독립시험 또는 중첩 모델선택 CV가 아니다.',small)
+    add('39특징·1,440 support vectors·저장 모델 642,444 bytes; 최종 개발 적합 0.751초(3개 보정용 적합+전체 재적합). 기존 모델-only 추론은 0.818 ms/창으로 특징 추출·기록 시간을 제외한다. 다른 실행 조건의 딥러닝 시간과 직접적인 속도비를 주장하지 않는다.',small)
+    add('최종 선택 이유는 단일 SVM의 성능과 간단한 추론 구성을 함께 고려했기 때문이다. 전처리의 filtfilt는 시행 전체를 사용하는 비인과 처리이므로 실시간 300 ms 응답 성능을 검증한 것은 아니다. 저장 예측·개발 OOF·고정 재현 코드와 점검 방법은 svm_final/에 있다.',small)
     story.append(PageBreak())
     add('4 결과 교차검증',heading)
     add('최종 시험 50시행을 제외한199 개발시행 내부에서 stratified5-fold를 수행했다. 각 fold는 새 DenseNet을45epoch 학습했으며 seed 43-47이다. 아래는 원본 / BN 변형이고 SD는 모집단 표준편차다.',small)
@@ -128,21 +151,22 @@ def main():
     add('2) 같은 시행의 19개 창은 겹치므로950개를 독립 시행으로 볼 수 없다. 최종 50시행은 이전5epoch 결과를 본 뒤 재사용했으므로 탐색적 비교이며 새로운 독립시험이 아니다.',small)
     add('3) 논문의 정확한 분할·CWT·dropout·첫 합성곱 변경 세부가 모두 명시돼 있지 않아94%와 직접적인 우열을 주장하지 않는다. BN 선택과 CV도 같은 개발집합을 사용했으므로 작은 개선의 일반성을 입증하지 않는다.',small)
     add('7 재현 정보',heading)
-    add('Linux, Python 3.12.14, PyTorch 2.8.0+cpu, torchvision 0.23.0+cpu를 사용했다(전체 의존성은 requirements.txt). AMD EPYC의 논리 CPU 4개씩 두 작업을 병렬 학습했으며 BN 변형은 원본 학습을 공유한다. 학습시간은 보존된 epoch의 학습 루프만 포함하며 전처리·검증·중단 후 폐기된 계산은 제외한다. 추론은 학습 종료 후 같은 논리 CPU 4개에서 batch 1, 10회 예열 뒤 100회 평균이며 전처리를 제외한다.',small)
+    add('딥러닝 재현 환경: Linux, Python 3.12.14, PyTorch 2.8.0+cpu, torchvision 0.23.0+cpu를 사용했다(전체 의존성은 requirements.txt). AMD EPYC의 논리 CPU 4개씩 두 작업을 병렬 학습했으며 BN 변형은 원본 학습을 공유한다. 학습시간은 보존된 epoch의 학습 루프만 포함하며 전처리·검증·중단 후 폐기된 계산은 제외한다. 추론은 학습 종료 후 같은 논리 CPU 4개에서 batch 1, 10회 예열 뒤 100회 평균이며 전처리를 제외한다.',small)
+    add('SVM 재현 환경: Python 3.12, NumPy 2.3.5, SciPy 1.17.0, scikit-learn 1.8.0, joblib 1.5.3이며 CPU로 실행한다. 보정 fold seed는 2026이다. 고정 코드·라이브러리 버전·저장 예측 검산과 재실행 명령은 svm_final/README.md에 있다.',small)
     add('설치·실행·파일 역할은 README에 있다. frozen_plan.json은 45epoch 최종 평가 전에 고정한 계획, runs/는 설정·loss·복구 기록, evaluation/은 실제 예측, summary/는 재검산된 지표·그림·보고서다.',small)
     add('제출 저장소: https://github.com/KyunghoCha/semg-auth-coursework · 최종 코드·결과: sEMG_final/',small)
     add('자료: sea3551/palm-sEMG-doorknob-filtered, commit adb7955f4416165c88e4111af6f8fdafd416209c, Data © 2025 Yeonjung Shin, CC BY 4.0. 논문 DOI 10.1038/s41598-026-46294-3. 방법과 베이스라인은 Step 1 2·3주차 강의 예제 기반이다.',small)
     add('생성형 AI 사용: 코드 작성·실험 실행·검증·보고서 정리에 활용했다. 수치는 저장한 실제 예측에서 계산했다.',small)
     def footer(canvas,doc):
         canvas.setFont('Nanum',8);canvas.setFillColor(colors.HexColor('#666666'));canvas.drawRightString(A4[0]-18*mm,9*mm,str(doc.page))
-    SimpleDocTemplate(str(out/'report.pdf'),pagesize=A4,leftMargin=18*mm,rightMargin=18*mm,topMargin=15*mm,bottomMargin=15*mm,title='손바닥 sEMG 식별 45epoch 비교실험',author='차경호').build(story,onFirstPage=footer,onLaterPages=footer)
+    SimpleDocTemplate(str(out/'report.pdf'),pagesize=A4,leftMargin=18*mm,rightMargin=18*mm,topMargin=15*mm,bottomMargin=15*mm,title='손바닥 sEMG 식별 최종 비교실험',author='차경호').build(story,onFirstPage=footer,onLaterPages=footer)
     write_readme(root,summary,distribution)
-    print('Created verified45epoch report and README')
+    print('Created verified deep-learning and standalone-SVM report and README')
 
 
 def write_readme(root,summary,distribution):
     report_link=Path(os.path.relpath(root/'summary/report.pdf',ROOT)).as_posix()
-    lines=['# 손바닥 sEMG 식별','', f'CWT로 등록자 A-E를 분류하는 Step 1 비교실험이다. 방법·혼동행렬·오류·한계는 [보고서]({report_link})에 있다.','',
+    lines=['# 손바닥 sEMG 식별','', f'등록자 A-E를 분류하는 Step 1 비교실험이다. 최종 선택은 **39특징 보정 SVM 단독: 887/950창 = 93.37%**이며, 기존 재사용 시험집합의 탐색적 결과다. 필수 딥러닝 비교실험도 보존했다. 방법·혼동행렬·오류·한계는 [보고서]({report_link})에 있다.','',
       '## 데이터와 방법','', '- 공개250시행 중 동일 신호 E50을 제외한249시행 사용',
       '- 시행을 먼저 학습 199 / 시험 50으로 분할(seed 42), 이후300 ms 창·150 ms hop으로3781/950윈도우 생성',
       '- 이미 필터링된 CSV에 수업의60 Hz notch(Q=30), 4차 20-499 Hz 필터를 추가 적용',
@@ -155,10 +179,19 @@ def write_readme(root,summary,distribution):
       '분할은 [data_utils.py](data_utils.py)의 split_trials와 experiment.py의 make_plan에서 시행 단위로 먼저 수행한다. 창 생성은 그 이후다.','',
       '| 윈도우 | A | B | C | D | E | 합계 |','|---|---:|---:|---:|---:|---:|---:|',
       *['| '+('학습' if row['split']=='train' else '시험')+' | '+' | '.join(str(row[k]) for k in ['A','B','C','D','E','total'])+' |' for row in distribution],'',
-      '## 실제 결과','', '950윈도우(원본 50시행)의3회 평균(%). Precision·Recall·F1은 macro 평균이다.','',
+      '## 필수 딥러닝 비교 결과','', '950윈도우(원본 50시행)의3회 평균(%). Precision·Recall·F1은 macro 평균이다.','',
       '| 모델 | Accuracy | Precision | Recall | F1 |','|---|---:|---:|---:|---:|']
     for r in summary['comparison']: lines.append('| '+r['model']+' | '+' | '.join(pct(r[k+'_mean']) for k in ['accuracy','precision_macro','recall_macro','f1_macro'])+' |')
-    lines += ['',f"최고: {summary['best_model']}, 최저: {summary['worst_model']}(평균 Accuracy 기준). 모델별 혼동행렬과 오류, fold별 값·평균±SD, 시간·파라미터는 보고서에 있다.",'',
+    lines += ['',f"딥러닝 비교군 최고: {summary['best_model']}, 최저: {summary['worst_model']}(평균 Accuracy 기준). 모델별 혼동행렬과 오류, fold별 값·평균±SD, 시간·파라미터는 보고서에 있다.",'',
+      '## 최종 선택 SVM','',
+      '| 모델 | Accuracy | Precision | Recall | F1 |', '|---|---:|---:|---:|---:|',
+      '| 39특징 보정 SVM 단독 | 93.37 | 93.45 | 93.37 | 93.40 |','',
+      '단일 모델의 기존 시험 950창 결과(%); Precision·Recall·F1은 macro 평균이다. 같은 50시행에서 19창의 확률을 평균한 별도 시행 지표는 50/50이며, 독립시험 100%를 뜻하지 않는다. 딥러닝 표는 3seed 평균이므로 반복 수와 실행 조건을 구분한다.','',
+      'StandardScaler + RBF SVC(C=1, gamma=scale), 시행 단위 3-fold sigmoid 보정(ensemble=False, seed 2026)이다. 39개 진폭·스펙트럼·파형 특징을 쓰며 CWT/min-max 입력과 다르다. 기존 개발 5-fold Accuracy 92.22±1.42%, macro F1 92.17±1.45%(모집단 SD)다. 이는 선택 후 안정성 점검이며 중첩 선택 CV가 아니다.','',
+      '성능과 단일 모델의 간단한 추론 구성을 고려해 선택했다. 1,440 support vectors, 642,444 bytes이며, 기존 모델-only 추론 0.818 ms/창은 신호 기록·특징 추출을 제외한다. 시행 전체 filtfilt를 사용하므로 실시간 응답시간으로 해석하지 않는다. 새 SVM 탐색이나 새 독립시험을 실행한 결과가 아니다.','',
+      '- [SVM 고정 재현 코드·환경·실행](svm_final/README.md)',
+      '- [SVM 혼동행렬](svm_final/confusion.png): E→B 14개, B→E 13개',
+      '- [최종 선택 기록](final_selection.json)','',
       '## 실행','', 'Linux, Python 3.12, 가용 논리 CPU 최소 4개, flock/taskset이 필요하다. 아래 기본 명령은 논리 CPU 4개 1작업이다. 실제 기록은 가용 논리 CPU 9개에서 각 4개를 쓰는 두 작업을 병렬 실행했다. 전체 재학습에는 수 시간이 걸린다.','',
       'PDF 재생성에는 NanumGothic 글꼴이 필요하다. Ubuntu: sudo apt-get install fonts-nanum. 다른 환경은 assets/README.md를 참고한다.','',
       '```bash','python -m venv .venv','source .venv/bin/activate',
@@ -170,6 +203,7 @@ def write_readme(root,summary,distribution):
       'python complete_evaluation45.py --run-root rerun45 --cache-dir cache45 --evaluate-test',
       'python make_report45.py --run-root rerun45','```','',
       '완료 체크포인트는 재사용한다. 새 실험은 별도 출력 폴더와 사전 계획을 사용하며 시험 결과로 설정을 바꾸지 않는다. 재학습 없이 수치를 재검산하려면 python summarize45.py --run-root results45를 실행한다.','',
+      '저장 예측 재검산과 PDF 재생성(새 학습·원본 데이터 불필요): python make_report45.py --run-root results45 --from-saved','',
       'BN 선택검증 재현(선택):','', '```bash',
       'python colab_run.py --job validate --model DenseNet161 --seed 42 --epochs 45 --device cpu --threads 4 --data-dir data/data --cache-dir cache45 --output-dir rerun_validation',
       'python bn_recalibrate.py --run-dir rerun_validation --output-dir rerun_bn --data-dir data/data --cache-dir cache45 --threads 4',

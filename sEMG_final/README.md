@@ -1,6 +1,6 @@
 # 손바닥 sEMG 식별
 
-CWT로 등록자 A-E를 분류하는 Step 1 비교실험이다. 방법·혼동행렬·오류·한계는 [보고서](results45/summary/report.pdf)에 있다.
+등록자 A-E를 분류하는 Step 1 비교실험이다. 최종 선택은 **39특징 보정 SVM 단독: 887/950창 = 93.37%**이며, 기존 재사용 시험집합의 탐색적 결과다. 필수 딥러닝 비교실험도 보존했다. 방법·혼동행렬·오류·한계는 [보고서](results45/summary/report.pdf)에 있다.
 
 ## 데이터와 방법
 
@@ -21,7 +21,7 @@ CWT로 등록자 A-E를 분류하는 Step 1 비교실험이다. 방법·혼동�
 | 학습 | 760 | 760 | 760 | 760 | 741 | 3781 |
 | 시험 | 190 | 190 | 190 | 190 | 190 | 950 |
 
-## 실제 결과
+## 필수 딥러닝 비교 결과
 
 950윈도우(원본 50시행)의3회 평균(%). Precision·Recall·F1은 macro 평균이다.
 
@@ -32,7 +32,23 @@ CWT로 등록자 A-E를 분류하는 Step 1 비교실험이다. 방법·혼동�
 | DenseNet161 | 88.53 | 88.92 | 88.53 | 88.55 |
 | DenseNet161+BN | 88.95 | 89.31 | 88.95 | 88.90 |
 
-최고: DenseNet161+BN, 최저: SimpleCNN(평균 Accuracy 기준). 모델별 혼동행렬과 오류, fold별 값·평균±SD, 시간·파라미터는 보고서에 있다.
+딥러닝 비교군 최고: DenseNet161+BN, 최저: SimpleCNN(평균 Accuracy 기준). 모델별 혼동행렬과 오류, fold별 값·평균±SD, 시간·파라미터는 보고서에 있다.
+
+## 최종 선택 SVM
+
+| 모델 | Accuracy | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|
+| 39특징 보정 SVM 단독 | 93.37 | 93.45 | 93.37 | 93.40 |
+
+단일 모델의 기존 시험 950창 결과(%); Precision·Recall·F1은 macro 평균이다. 같은 50시행에서 19창의 확률을 평균한 별도 시행 지표는 50/50이며, 독립시험 100%를 뜻하지 않는다. 딥러닝 표는 3seed 평균이므로 반복 수와 실행 조건을 구분한다.
+
+StandardScaler + RBF SVC(C=1, gamma=scale), 시행 단위 3-fold sigmoid 보정(ensemble=False, seed 2026)이다. 39개 진폭·스펙트럼·파형 특징을 쓰며 CWT/min-max 입력과 다르다. 기존 개발 5-fold Accuracy 92.22±1.42%, macro F1 92.17±1.45%(모집단 SD)다. 이는 선택 후 안정성 점검이며 중첩 선택 CV가 아니다.
+
+성능과 단일 모델의 간단한 추론 구성을 고려해 선택했다. 1,440 support vectors, 642,444 bytes이며, 기존 모델-only 추론 0.818 ms/창은 신호 기록·특징 추출을 제외한다. 시행 전체 filtfilt를 사용하므로 실시간 응답시간으로 해석하지 않는다. 새 SVM 탐색이나 새 독립시험을 실행한 결과가 아니다.
+
+- [SVM 고정 재현 코드·환경·실행](svm_final/README.md)
+- [SVM 혼동행렬](svm_final/confusion.png): E→B 14개, B→E 13개
+- [최종 선택 기록](final_selection.json)
 
 ## 실행
 
@@ -56,6 +72,8 @@ python make_report45.py --run-root rerun45
 ```
 
 완료 체크포인트는 재사용한다. 새 실험은 별도 출력 폴더와 사전 계획을 사용하며 시험 결과로 설정을 바꾸지 않는다. 재학습 없이 수치를 재검산하려면 python summarize45.py --run-root results45를 실행한다.
+
+저장 예측 재검산과 PDF 재생성(새 학습·원본 데이터 불필요): python make_report45.py --run-root results45 --from-saved
 
 BN 선택검증 재현(선택):
 

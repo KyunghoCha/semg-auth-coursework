@@ -1,0 +1,2 @@
+# Historical CSV bytes (including CRLF) are part of the audited evidence.
+*.csv -text
