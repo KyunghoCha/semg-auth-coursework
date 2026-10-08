@@ -15,7 +15,6 @@
   "required_deep_learning_experiments": "Preserved: SimpleCNN, ResNet18, DenseNet161, DenseNet161+BN; three seeds; DenseNet five-fold development CV",
   "original_deep_learning_plan": "results45/frozen_plan.json",
   "original_deep_learning_plan_sha256": "48816b50f89b30a994109e3ec0368035f1c38e6ef336fa23909f28a32f109c26",
-  "final_report": "results45/summary/report.pdf",
   "svm_reproduction_and_evidence": "svm_final/README.md",
   "no_new_model_selection_cv_claim": true,
   "limitations": [
@@ -23,5 +22,8 @@
     "Reused test set; overlapping windows not independent trials",
     "SVM retains amplitude and may depend on electrode/session conditions",
     "Whole-trial noncausal filtfilt; model-only timings are not recording-to-decision latency"
-  ]
+  ],
+  "primary_report": "../README.md",
+  "summary_report": "results45/summary/report.pdf",
+  "report_organization": "Root README is the complete report; preserved four-page PDF is the concise coursework summary"
 }
